@@ -24,7 +24,7 @@ const Navbar = () => {
   const user: any = {
     name: "John Deo",
     email: "john@example.com",
-    isAdmin: true,
+    isAdmin: true, 
   };
 
   const { cartCount, setIsCartOpen } = useCart();
