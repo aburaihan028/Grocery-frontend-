@@ -3,9 +3,8 @@
 // npm i -D @types/leaflet
 
 // ======================== =========================
-// !!cartItem
-
 // এর কাজ হলো যেকোনো value কে boolean এ convert করা।
+// !!cartItem
 
 // Example
 // !!undefined  // false
