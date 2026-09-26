@@ -1,73 +1,100 @@
-# React + TypeScript + Vite
+# 🛒 Grocery Delivery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive grocery shopping frontend application built with **React.js, TypeScript, and Tailwind CSS**.
 
-Currently, two official plugins are available:
+This project provides a user-friendly interface for browsing grocery products, viewing product details, searching and filtering products, and managing a shopping cart.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🏗️ Project Type
 
-## React Compiler
+**Frontend-only application**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project focuses on the user interface and client-side grocery shopping experience. It does not include a custom backend API.
 
-## Expanding the ESLint configuration
+## 🌐 Live Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**[Visit Grocery Delivery](https://grocery-frontend-iota-umber.vercel.app/)**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📸 Screenshot
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✨ Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- 🛍️ **Browse Grocery Products** — Explore available grocery products.
+- 📦 **Product Details** — View detailed information about individual products.
+- 🔍 **Search Products** — Search for products easily.
+- 🎯 **Filter Products** — Filter products based on available criteria.
+- 🛒 **Add to Cart** — Add products to the shopping cart.
+- 🧺 **Manage Shopping Cart** — Manage items in the cart.
+- 📱 **Responsive UI** — User-friendly interface for desktop, tablet, and mobile devices.
+
+## 🛠️ Technologies Used
+
+| Technology   | Purpose                              |
+| ------------ | ------------------------------------ |
+| React.js     | Building reusable UI components      |
+| TypeScript   | Type safety and maintainable code    |
+| Tailwind CSS | Responsive and utility-first styling |
+
+## 📦 Dependencies
+
+The main technologies used in this project are:
+
+- React
+- TypeScript
+- Tailwind CSS
+
+Additional dependencies can be found in the project's `package.json` file.
+
+## ⚙️ Installation & Setup
+
+Follow these steps to run the project locally.
+
+### Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- npm (included with Node.js)
+- Git
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/aburaihan490/Grocery-frontend-.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Navigate to the Project Directory
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd Grocery-frontend-
 ```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the Development Server
+
+```bash
+npm run dev
+```
+
+### 5. Open in Browser
+
+Open the local URL displayed in your terminal to view the application.
+
+## 🔗 Links
+
+- **Live Demo:** https://grocery-frontend-iota-umber.vercel.app/
+- **GitHub Repository:** https://github.com/aburaihan490/Grocery-frontend-
+
+## 👨‍💻 Author
+
+**Abu Raihan**
+
+GitHub: [@aburaihan490](https://github.com/aburaihan490)
+
+---
+
+⭐ If you find this project useful, consider giving it a star!
