@@ -1,5 +1,6 @@
 import { CheckIcon, MapPinIcon, PencilIcon, Trash2Icon } from 'lucide-react';
 import type { Address } from '../types';
+import { useEffect } from 'react';
 
 interface AddressCardProps {
     address: Address;
@@ -15,6 +16,15 @@ const AddressCard = ({
     const handleDelete = async (id: string) => {
         console.log(id);
     };
+
+    // do not work
+    useEffect(() => {
+        setAddresses([
+            {
+                ...address,
+            },
+        ]);
+    }, []);
     return (
         <div className="max-w-3xl bg-white rounded-2xl p-6 flex items-start justify-between">
             {/* left */}

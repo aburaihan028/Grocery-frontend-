@@ -16,17 +16,28 @@ const OrderTracking = () => {
     const [order, setOrder] = useState<Order | null>(null);
     const [loading, setLoading] = useState(true);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [liveLocation, setLiveLocation] = useState<{
         lat: number;
         lng: number;
     } | null>(null);
 
     useEffect(() => {
+        setLiveLocation({
+            ...liveLocation,
+            lat: 0,
+            lng: 22,
+        });
+    });
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect, @typescript-eslint/no-explicit-any
         setOrder(dummyDashboardOrdersData.find((o) => o._id === id) as any);
         setLoading(false);
     }, [id, navigate]);
 
     if (loading) return <Loading />;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     if (!order) null;
 
     return (
