@@ -5,12 +5,7 @@ import { Link, useSearchParams } from 'react-router';
 import { useCart } from '../context/CartContext';
 import { dummyDashboardOrdersData, statusColors } from '../assets/assets';
 import Loading from '../components/Loding';
-import {
-    CalendarIcon,
-    ChevronRight,
-    ChevronRightIcon,
-    PackageIcon,
-} from 'lucide-react';
+import { CalendarIcon, ChevronRightIcon, PackageIcon } from 'lucide-react';
 
 const MyOrder = () => {
     const currency = env.currency;

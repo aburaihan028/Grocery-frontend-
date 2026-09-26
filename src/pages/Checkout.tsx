@@ -1,10 +1,20 @@
 import { useNavigate } from 'react-router';
 import { env } from '../config/env';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { dummyAddressData } from '../assets/assets';
 import type { Address } from '../types';
-import { CheckIcon, CreditCardIcon, MapIcon, MapPinIcon } from 'lucide-react';
+import {
+    ArrowLeft,
+    CheckIcon,
+    ChevronRightIcon,
+    CreditCardIcon,
+    MapIcon,
+    MapPinIcon,
+} from 'lucide-react';
+import CheckoutAddress from '../components/Checkout/CheckoutAddress';
+import CheckoutPayment from '../components/Checkout/CheckoutPayment';
+import CheckoutReview from '../components/Checkout/CheckoutReview';
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -13,6 +23,7 @@ const Checkout = () => {
     const { items, cartTotal } = useCart();
     const { user } = { user: { addresses: dummyAddressData } };
 
+    const [step, setStep] = useState('address');
     const [loading, setLoading] = useState(false);
 
     const [address, setAddress] = useState<Address>({
@@ -36,7 +47,7 @@ const Checkout = () => {
     const steps: { key: string; lable: string; icon: typeof MapPinIcon }[] = [
         { key: 'address', lable: 'Address', icon: MapIcon },
         { key: 'payment', lable: 'Payment', icon: CreditCardIcon },
-        { key: 'address', lable: 'Address', icon: CheckIcon },
+        { key: 'review', lable: 'Review', icon: CheckIcon },
     ];
 
     const handlePlaceOrder = async () => {
@@ -45,8 +56,7 @@ const Checkout = () => {
     };
 
     // Populate address from user's default address
-
-    useEffect(() => {
+    const call = useCallback(() => {
         if (user?.addresses?.length) {
             const defaultAddr =
                 user.addresses.find((a) => a.isDefault) || user.addresses[0];
@@ -56,15 +66,101 @@ const Checkout = () => {
                 address: defaultAddr?.address,
                 city: defaultAddr?.city,
                 state: defaultAddr?.state,
-                zip: '',
-                isDefault: false,
-                lat: 0,
-                lng: 0,
+                zip: defaultAddr?.zip,
+                isDefault: defaultAddr?.isDefault,
+                lat: defaultAddr?.lat,
+                lng: defaultAddr?.lng,
             });
         }
-    }, []);
+    }, [user.addresses]);
+    useEffect(() => {
+        call();
+    }, [call]);
 
-    return <div>Checkout</div>;
+    if (items.length === 0) {
+        return (
+            <div className="min-h-screen bg-app-cream flex-center">
+                <div className="text-center">
+                    <h2 className="text-xl font-semibold text-app-green mb-2">
+                        Your cart is empty
+                    </h2>
+                    <p className="text-sm text-app-text-light mb-4">
+                        Add some products to checkout
+                    </p>
+                    <button
+                        onClick={() => navigate('/products')}
+                        className="px-5 py-2.5 bg-app-green text-white text-sm font-medium rounded-xl hover:bg-app-green-light transition-colors"
+                    >
+                        Browse Products
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-app-cream">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Back Button */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center gap-2 text-sm text-app-text-light hover:text-app-green mb-6 transition-colors"
+                >
+                    <ArrowLeft className="size-4" />
+                </button>
+
+                <h1 className="text-2xl font-semibold text-app-green mb-8">
+                    Checkout
+                </h1>
+                <div className="flex items-center gap-2 mb-8">
+                    {steps.map((s, i) => (
+                        <div key={s.key} className="flex items-center gap-2">
+                            <button
+                                onClick={() => setStep(s.key)}
+                                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors e ${step === s.key ? 'bg-app-green text-white' : 'bg-white text-app-text-light'}`}
+                            >
+                                <s.icon className="size-4" /> {s.lable}
+                                {i < steps.length - 1 && (
+                                    <ChevronRightIcon className="size-4" />
+                                )}
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                    {/* Main form */}
+                    <div className="md:col-span-2">
+                        {step === 'address' && (
+                            <CheckoutAddress
+                                address={address}
+                                setAddress={setAddress}
+                                setStep={setStep}
+                                user={user}
+                            />
+                        )}
+                        {step === 'payment' && (
+                            <CheckoutPayment
+                                paymentMethod={paymentMethod}
+                                setPaymentMethod={setPaymentMethod}
+                                setStep={setStep}
+                            />
+                        )}
+                        {step === 'review' && (
+                            <CheckoutReview
+                                address={address}
+                                items={items}
+                                loading={loading}
+                                handlePlaceOrder={handlePlaceOrder}
+                                total={total}
+                            />
+                        )}
+                    </div>
+                    {/* Order Summary Sidebar */}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Checkout;
